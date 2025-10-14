@@ -1,0 +1,135 @@
+.contenedor1 {
+    display: flex;
+    flex-direction: column;        /* h2 y .buscar en vertical */
+    background-color: white;
+    border-radius: 20px;
+    margin-top: 40px;
+    padding: 20px;
+    gap: 20px;
+}
+
+.contenedor1 h2 {
+    padding: 10px;
+    border-radius: 10px;
+    margin: 0;
+    color: rgb(0, 0, 0);
+}
+
+/* Sección de búsqueda */
+.contenedor1 .buscar {
+    background-color: rgb(221, 221, 221);
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.contenedor1 .buscar form {
+    display: flex;               /* Todo en fila */
+    align-items: center;         /* Centrado vertical */
+    gap: 12px;                   /* Espacio entre cada elemento */
+    width: 100%;
+    flex-wrap: wrap;             /* Permite que los inputs bajen de línea si no caben */
+}
+
+.buscar input, .buscar select {
+    flex: 1 1 150px;             /* Crece, pero mínimo 150px */
+    min-width: 120px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.buscar button {
+    flex: 0 0 auto;              /* Evita que el botón se estire */
+    padding: 8px 20px;           /* Tamaño adecuado */
+    font-size: 15px;             /* letra un poco más grande */
+    border: none;
+    border-radius: 6px;
+    background: linear-gradient(45deg, #001aff, #00b7ff);
+    color: white;
+    cursor: pointer;
+    white-space: nowrap;         /* evita que el texto se corte */
+}
+
+.buscar button:hover {
+    background-color: #0056b3;
+}
+
+
+
+
+
+
+
+
+
+
+.contenedor2 {
+    display: flex;                 /* pone los hijos horizontalmente */
+    justify-content: space-between; /* cajas a la izquierda, botón a la derecha */
+    align-items: flex-start;      /* alineación superior */
+    margin-top: 20px;              /* espacio arriba */
+}
+
+.contenedor2 .cajas {
+    display: block; /* o flex solo horizontal si quieres varias cajas */
+    margin-top: 40px;
+    text-align: center; /* centra horizontalmente el contenido */
+}
+
+.contenedor2 .cajas div {
+    width: 1000px;
+    padding: 20px;
+    margin-right: 350px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    height: auto;  /* ajusta al contenido */
+    display: block; /* para que la tabla se vea correctamente */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #444;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+     background: linear-gradient(45deg, #001aff, #00b7ff);
+    color: white;
+}
+
+
+.botones {
+    display: flex;
+    flex-direction: column; 
+    padding: 30px;
+                 
+}
+
+.botones div{
+    background-color: white;
+    margin: 40px 10px 0 0px;
+    padding: 10px;
+    border-radius: 10px;
+    border-style: groove;
+    cursor: pointer;
+    height: fit-content;
+    text-align: center;
+
+}
+.botones div a{
+    background-color: white;
+    color: black;
+    border-style: none;
+    text-decoration: none;
+    
+}

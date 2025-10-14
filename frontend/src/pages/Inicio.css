@@ -1,0 +1,157 @@
+/* Contenedor principal */
+.container {
+  padding: 30px;
+  background: #f8f9fb;
+}
+
+/* Tarjetas resumen */
+.cards {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 1;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.card h3 {
+  margin-bottom: 10px;
+  color: #184866;
+}
+
+.card p {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Barra de progreso */
+.progress-bar {
+  background: #e6e6e6;
+  border-radius: 20px;
+  overflow: hidden;
+  height: 25px;
+}
+
+.progress {
+  background: #2ca02c;
+  padding-left: 10px;
+  color: white;
+  height: 100%;
+  text-align: center;
+  line-height: 25px;
+  font-weight: bold;
+}
+
+/* Gráficos */
+.charts {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.chart-box {
+  flex: 1;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Accesos rápidos */
+.quick-actions {
+  margin-bottom: 30px;
+}
+
+.actions {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.actions button {
+  flex: 1;
+  background-color: #184866;
+  color: white;
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.actions button:hover {
+  background-color: #1f5a85;
+}
+
+/* Tablas */
+.tables {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.table-section {
+  flex: 1;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.table-section h2 {
+  margin-bottom: 15px;
+  color: #184866;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: #184866;
+  color: white;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+  background-color: #f3f7fa;
+}
+
+/* Notificaciones */
+.notifications {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.notifications h2 {
+  margin-bottom: 10px;
+  color: #184866;
+}
+
+.notifications ul {
+  list-style: none;
+}
+
+.notifications li {
+  margin-bottom: 8px;
+  font-size: 15px;
+}

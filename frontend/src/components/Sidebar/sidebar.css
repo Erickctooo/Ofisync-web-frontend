@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+* {
+    font-family: 'Oswald', sans-serif;
+}
+.sidebar {
+    position: fixed;          /* fijo en la izquierda */
+    top: 120px;               /* empieza debajo del header */
+    left: 0;
+    width: 200px;
+    height: calc(100% - 120px); /* ocupa el resto de la pantalla */
+    background: linear-gradient(45deg, #001aff, #00b7ff);
+    padding: 20px;
+}
+.sidebar ul{
+    list-style:  none;
+    padding: 0;
+}
+.sidebar ul li{
+    margin: 15px 0;
+}
+.sidebar ul li a{
+    color: white;
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s;
+}
+.sidebar ul li a::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 100%;
+    background-color: white;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.3s ease;
+}
+.sidebar ul li a:hover::after {
+    transform: scaleX(1);       
+}
+.sidebar .logout{
+    position: fixed;
+    bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sidebar .logout img{
+    width: 30px;
+    border-radius: 100px;
+    margin-right: 5px;
+
+}
