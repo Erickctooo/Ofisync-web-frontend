@@ -3,13 +3,13 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
- "scripts": {
+"scripts": {
   "dev": "vite",
   "build": "vite build",
   "lint": "eslint .",
   "preview": "vite preview",
   "test": "jest",
-  "test:unit": "jest .test.js",
+  "test:unit": "jest validators.test.js",
   "test:integration": "jest .integration.test.jsx"
 },
   "dependencies": {
