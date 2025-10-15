@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@500;700&display=swap');
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -11,6 +12,20 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  /* 👇 Aplica Lato como fuente principal para todo el cuerpo */
+  font-family: 'Lato', sans-serif;
+}
+
+/* 👇 Define Montserrat para los títulos principales */
+h1, h2, h3 {
+  font-family: 'Montserrat', sans-serif;
 }
 
 a {
