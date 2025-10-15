@@ -46,20 +46,26 @@ function AgregarEdificio() {
     return (
         <div className="contenedorAgregar">
             <h2>Agregar Edificio</h2>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="nombre_edificio">Nombre Edificio:</label>
-                <input id="nombre_edificio" type="text" name="nombre" value={form.nombre} onChange={handleChange} />
-
-                <label htmlFor="pisos_totales">Pisos Totales:</label>
-                <input id="pisos_totales" type="number" name="pisos_totales" value={form.pisos_totales} onChange={handleChange} />
-
-                <label htmlFor="area_bruta_por_piso">Área bruta por piso (m²):</label>
-                <input id="area_bruta_por_piso" type="number" name="area_bruta_por_piso" value={form.area_bruta_por_piso} onChange={handleChange} />
-
-                <label htmlFor="area_comun_pct">Área común (%):</label>
-                <input id="area_comun_pct" type="number" name="area_comun_pct" value={form.area_comun_pct} onChange={handleChange} />
-
-                <button type="submit">Agregar</button>
+            <form onSubmit={handleSubmit} className="agregar-form">
+                <div className="form-group span-2">
+                    <label htmlFor="nombre_edificio">Nombre Edificio</label>
+                    <input id="nombre_edificio" type="text" name="nombre" value={form.nombre} onChange={handleChange} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="pisos_totales">Pisos Totales</label>
+                    <input id="pisos_totales" type="number" name="pisos_totales" value={form.pisos_totales} onChange={handleChange} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="area_bruta_por_piso">Área bruta por piso (m²)</label>
+                    <input id="area_bruta_por_piso" type="number" name="area_bruta_por_piso" value={form.area_bruta_por_piso} onChange={handleChange} />
+                </div>
+                <div className="form-group span-2">
+                    <label htmlFor="area_comun_pct">Área común (%)</label>
+                    <input id="area_comun_pct" type="number" name="area_comun_pct" value={form.area_comun_pct} onChange={handleChange} />
+                </div>
+                <div className="form-group span-full">
+                    <button type="submit">Agregar Edificio</button>
+                </div>
             </form>
         </div>
     );

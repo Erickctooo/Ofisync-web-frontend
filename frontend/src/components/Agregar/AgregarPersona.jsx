@@ -51,20 +51,26 @@ function AgregarPersona() {
     return (
         <div className="contenedorAgregar">
             <h2>Agregar Arrendatario</h2>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="rut_persona">Rut:</label>
-                <input id="rut_persona" type="text" name="rut" value={form.rut} onChange={handleChange} />
-
-                <label htmlFor="nombre_persona">Nombre completo:</label>
-                <input id="nombre_persona" type="text" name="nombre" value={form.nombre} onChange={handleChange} />
-                
-                <label htmlFor="correo_persona">Correo:</label>
-                <input id="correo_persona" type="email" name="correo" value={form.correo} onChange={handleChange} />
-
-                <label htmlFor="telefono_persona">Telefono:</label>
-                <input id="telefono_persona" type="number" name="telefono" value={form.telefono} onChange={handleChange} />
-
-                <button type="submit">Agregar</button>
+            <form onSubmit={handleSubmit} className="agregar-form">
+                <div className="form-group">
+                    <label htmlFor="rut_persona">Rut</label>
+                    <input id="rut_persona" type="text" name="rut" value={form.rut} onChange={handleChange} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="nombre_persona">Nombre completo</label>
+                    <input id="nombre_persona" type="text" name="nombre" value={form.nombre} onChange={handleChange} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="correo_persona">Correo</label>
+                    <input id="correo_persona" type="email" name="correo" value={form.correo} onChange={handleChange} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="telefono_persona">Teléfono</label>
+                    <input id="telefono_persona" type="number" name="telefono" value={form.telefono} onChange={handleChange} />
+                </div>
+                <div className="form-group span-full">
+                    <button type="submit">Agregar Arrendatario</button>
+                </div>
             </form>
         </div>
     );

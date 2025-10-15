@@ -69,45 +69,33 @@ function AgregarPiso() {
 
   return (
     <div className="contenedorAgregar">
-      <h2>Agregar Pisos a un Edificio</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="edificio_id_piso">Edificio:</label>
-        <select
-          id="edificio_id_piso"
-          name="edificio_id"
-          value={form.edificio_id}
-          onChange={handleChange}
-          required
-        >
-          <option value="">Seleccione un edificio</option>
-          {edificios.map((edificio) => (
-            <option key={edificio.id} value={edificio.id}>
-              {edificio.nombre} (Pisos totales: {edificio.pisos_totales})
-            </option>
-          ))}
-        </select>
-
-        {form.edificio_id && (
-          <p>
-            Pisos creados: {pisosExistentes} | Pisos restantes: {pisosDisponibles}
-          </p>
-        )}
-
-        <label htmlFor="cantidad_pisos">Cantidad de pisos a agregar:</label>
-        <input
-          id="cantidad_pisos"
-          type="number"
-          name="cantidad"
-          value={form.cantidad}
-          onChange={handleChange}
-          required
-          min="1"
-          max={pisosDisponibles}
-        />
-
-        <button type="submit">Agregar Pisos</button>
-      </form>
-    </div>
+            <h2>Agregar Pisos a un Edificio</h2>
+            <form onSubmit={handleSubmit} className="agregar-form">
+                <div className="form-group">
+                    <label htmlFor="edificio_id_piso">Edificio</label>
+                    <select id="edificio_id_piso" name="edificio_id" value={form.edificio_id} onChange={handleChange} required>
+                        <option value="">Seleccione un edificio</option>
+                        {edificios.map((edificio) => (
+                            <option key={edificio.id} value={edificio.id}>
+                                {edificio.nombre}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="cantidad_pisos">Cantidad de pisos a agregar</label>
+                    <input id="cantidad_pisos" type="number" name="cantidad" value={form.cantidad} onChange={handleChange} required min="1" max={pisosDisponibles} />
+                </div>
+                {form.edificio_id && (
+                    <div className="pisos-info">
+                        Pisos creados: {pisosExistentes} | Pisos restantes: {pisosDisponibles}
+                    </div>
+                )}
+                <div className="form-group span-full">
+                    <button type="submit">Agregar Pisos</button>
+                </div>
+            </form>
+        </div>
   );
 }
 

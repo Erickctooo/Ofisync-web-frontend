@@ -1,59 +1,99 @@
+/* Contenedor principal para cada sección del formulario */
 .contenedorAgregar {
-    display: flex;
-    flex-direction: column;
     background-color: white;
     border-radius: 20px;
-    margin-top: 40px;
-    padding: 20px;
-    gap: 20px;
+    padding: 30px;
+    margin-bottom: 30px; /* Espacio entre formularios */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    color: #333;
 }
 
 .contenedorAgregar h2 {
-    padding: 10px;
-    border-radius: 10px;
-    margin: 0;
-    color: rgb(0, 0, 0);
+    color: #184866;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    font-size: 1.6rem;
 }
 
-/* Formulario estilo Contenedor1 */
-.contenedorAgregar form {
+/* Usamos un grid para organizar el formulario */
+.agregar-form {
+    display: grid;
+    /* Crea columnas automáticas que se adaptan al espacio disponible */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px 25px; /* Espacio vertical y horizontal */
+}
+
+/* Contenedor para cada par de etiqueta + campo */
+.form-group {
     display: flex;
-    flex-wrap: wrap;         /* Permite que los elementos bajen de línea en pantallas pequeñas */
-    align-items: center;
-    gap: 15px;
-    background-color: rgb(221, 221, 221);
-    padding: 10px;
-    border-radius: 5px;
+    flex-direction: column;
 }
 
-.contenedorAgregar input,
-.contenedorAgregar select {
-    flex: 1 1 150px;        /* Crece proporcionalmente pero con mínimo 150px */
-    min-width: 120px;
-    padding: 8px;
-    border-radius: 5px;
+/* Clase para que un elemento ocupe 2 columnas */
+.form-group.span-2 {
+    grid-column: span 2;
+}
+
+/* Clase para que el botón ocupe el ancho completo */
+.form-group.span-full {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
     border: 1px solid #ccc;
     box-sizing: border-box;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.contenedorAgregar button {
-    flex: 0 0 auto;         /* Evita que el botón se estire */
-    padding: 8px 20px;
-    font-size: 15px;
+/* Efecto al seleccionar un campo */
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+
+/* Estilo del botón */
+.agregar-form button {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1rem;
+    font-weight: bold;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     background: linear-gradient(45deg, #001aff, #00b7ff);
     color: white;
     cursor: pointer;
-    white-space: nowrap;
+    margin-top: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.contenedorAgregar button:hover {
-    background-color: #0056b3;
+.agregar-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Labels alineados con los inputs */
-.contenedorAgregar label {
-    min-width: 120px;
-    font-weight: 500;
+/* Mensaje de pisos disponibles en AgregarPiso */
+.pisos-info {
+    font-size: 0.9rem;
+    color: #666;
+    background-color: #f3f7fa;
+    padding: 10px;
+    border-radius: 6px;
+    margin-top: -10px;
+    grid-column: 1 / -1; /* Ocupa todo el ancho */
+    text-align: center;
 }
