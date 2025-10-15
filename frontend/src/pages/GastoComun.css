@@ -1,63 +1,91 @@
-.main-content {
-    flex: 1;
+/* Contenedor principal, estilo consistente con el resto de la app */
+.gasto-comun-container {
+    background-color: #ffffff;
+    border-radius: 20px;
     padding: 30px;
-    overflow-x: auto;
-}
-h1, h2 {
+    margin-top: 40px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     color: #333;
 }
-.cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-bottom: 30px;
-}
-.card {
-    background-color: white;
-    padding: 20px;
-    flex: 1 1 150px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+.gasto-comun-container h2 {
+    color: #184866;
+    margin-bottom: 25px;
     text-align: center;
-}
-.total-general {
-    background-color: #007bff;
-    color: white;
-}
-.form-section {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    margin-bottom: 30px;
+    font-size: 1.8rem;
 }
 
+/* Usamos un grid para organizar el formulario en 2 columnas */
+.gasto-comun-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 30px; /* Espacio vertical y horizontal */
+}
+
+/* Grupo de etiqueta + campo */
 .form-group {
-    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
 }
 
-label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
+/* Clase para que un elemento ocupe las 2 columnas */
+.form-group.span-2, .total-display.span-2 {
+    grid-column: 1 / -1;
 }
 
-input[type="number"], input[type="text"], select {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 16px;
+.form-group label {
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #555;
 }
 
-button {
+.form-group input,
+.form-group select,
+.form-group textarea {
     width: 100%;
     padding: 12px;
-    background-color: #007bff;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+.form-group textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+/* Estilo para mostrar el total calculado */
+.total-display {
+    background-color: #f3f7fa;
+    border-left: 5px solid #184866;
+    padding: 15px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.total-display h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #184866;
+}
+
+/* Estilo del botón, consistente con el resto de la app */
+.gasto-comun-form button {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1rem;
     border: none;
+    border-radius: 8px;
+    background: linear-gradient(45deg, #001aff, #00b7ff);
     color: white;
-    font-size: 18px;
-    border-radius: 5px;
     cursor: pointer;
-    transition: 0.3s;
+    margin-top: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.gasto-comun-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
 }

@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { calcularGastoComunApi } from "../../services/gastoComunService";
 import { getEdificios } from "../../services/edificioService";
+import "./GastoComun.css"; // <-- ¡Importante! Importa el archivo CSS
 
 function CalcularGastoComun() {
   const [edificios, setEdificios] = useState([]);
   const [form, setForm] = useState({
     edificio_id: "",
     mes: "",
-    total: "",
     descripcion: "",
+    gastos: {
+      luz: "",
+      agua: "",
+      mantencion: "",
+      otros: ""
+    }
   });
 
   useEffect(() => {
@@ -18,14 +24,28 @@ function CalcularGastoComun() {
   }, []);
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    // Si el campo pertenece a los gastos, actualizamos el estado anidado
+    if (['luz', 'agua', 'mantencion', 'otros'].includes(name)) {
+      setForm({
+        ...form,
+        gastos: {
+          ...form.gastos,
+          [name]: value
+        }
+      });
+    } else {
+      setForm({ ...form, [name]: value });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!form.edificio_id || !form.mes || !form.total) {
-      alert("Debe completar los campos obligatorios");
+    const totalCalculado = Object.values(form.gastos).reduce((sum, current) => sum + (Number(current) || 0), 0);
+
+    if (!form.edificio_id || !form.mes || totalCalculado <= 0) {
+      alert("Debe completar los campos obligatorios y el total debe ser mayor a cero.");
       return;
     }
 
@@ -33,7 +53,11 @@ function CalcularGastoComun() {
       const data = await calcularGastoComunApi({
         edificio_id: parseInt(form.edificio_id),
         mes: form.mes,
-        total: parseFloat(form.total),
+        total: totalCalculado,
+        luz: Number(form.gastos.luz) || 0,
+        agua: Number(form.gastos.agua) || 0,
+        mantencion: Number(form.gastos.mantencion) || 0,
+        otros: Number(form.gastos.otros) || 0,
         descripcion: form.descripcion,
       });
 
@@ -43,59 +67,73 @@ function CalcularGastoComun() {
         `${data.mensaje}\n💵 Gasto por m²: $${data.gasto_por_m2}`
       );
 
-      setForm({ edificio_id: "", mes: "", total: "", descripcion: "" });
+      // Limpiamos el formulario
+      setForm({
+        edificio_id: "",
+        mes: "",
+        descripcion: "",
+        gastos: { luz: "", agua: "", mantencion: "", otros: "" }
+      });
     } catch (err) {
       alert("Error al calcular gasto común: " + err.message);
     }
   };
 
+  // Calculamos el total en tiempo real para mostrarlo
+  const totalCalculado = Object.values(form.gastos).reduce((sum, current) => sum + (Number(current) || 0), 0);
+
   return (
-    <div className="contenedorAgregar">
+    <div className="gasto-comun-container">
       <h2>Calcular Gasto Común</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="edificio_id">Edificio:</label>
-        <select
-          id="edificio_id"
-          name="edificio_id"
-          value={form.edificio_id}
-          onChange={handleChange}
-        >
-          <option value="">Seleccione un edificio</option>
-          {edificios.map((edificio) => (
-            <option key={edificio.id} value={edificio.id}>
-              {edificio.nombre}
-            </option>
-          ))}
-        </select>
+      <form onSubmit={handleSubmit} className="gasto-comun-form">
+        
+        <div className="form-group span-2">
+          <label htmlFor="edificio_id">Edificio:</label>
+          <select id="edificio_id" name="edificio_id" value={form.edificio_id} onChange={handleChange}>
+            <option value="">Seleccione un edificio</option>
+            {edificios.map((edificio) => (
+              <option key={edificio.id} value={edificio.id}>{edificio.nombre}</option>
+            ))}
+          </select>
+        </div>
 
-        <label htmlFor="mes">Mes:</label>
-        <input
-          id="mes"
-          type="text"
-          name="mes"
-          value={form.mes}
-          onChange={handleChange}
-          placeholder="Ej: Octubre 2025"
-        />
+        <div className="form-group span-2">
+          <label htmlFor="mes">Mes:</label>
+          <input id="mes" type="text" name="mes" value={form.mes} onChange={handleChange} placeholder="Ej: Octubre 2025" />
+        </div>
 
-        <label htmlFor="total">Total de gastos ($):</label>
-        <input
-          id="total"
-          type="number"
-          name="total"
-          value={form.total}
-          onChange={handleChange}
-        />
+        <div className="form-group">
+          <label htmlFor="luz">Gasto Luz ($):</label>
+          <input id="luz" type="number" name="luz" value={form.gastos.luz} onChange={handleChange} placeholder="0" />
+        </div>
 
-        <label htmlFor="descripcion">Descripción (opcional):</label>
-        <textarea
-          id="descripcion"
-          name="descripcion"
-          value={form.descripcion}
-          onChange={handleChange}
-        />
+        <div className="form-group">
+          <label htmlFor="agua">Gasto Agua ($):</label>
+          <input id="agua" type="number" name="agua" value={form.gastos.agua} onChange={handleChange} placeholder="0" />
+        </div>
 
-        <button type="submit">Calcular</button>
+        <div className="form-group">
+          <label htmlFor="mantencion">Gasto Mantención ($):</label>
+          <input id="mantencion" type="number" name="mantencion" value={form.gastos.mantencion} onChange={handleChange} placeholder="0" />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="otros">Otros Gastos ($):</label>
+          <input id="otros" type="number" name="otros" value={form.gastos.otros} onChange={handleChange} placeholder="0" />
+        </div>
+        
+        <div className="form-group span-2">
+          <label htmlFor="descripcion">Descripción (opcional):</label>
+          <textarea id="descripcion" name="descripcion" value={form.descripcion} onChange={handleChange} />
+        </div>
+
+        <div className="total-display span-2">
+          <h3>Total Calculado: $ {totalCalculado.toLocaleString('es-CL')}</h3>
+        </div>
+
+        <div className="form-group span-2">
+          <button type="submit">Calcular Gasto</button>
+        </div>
       </form>
     </div>
   );
