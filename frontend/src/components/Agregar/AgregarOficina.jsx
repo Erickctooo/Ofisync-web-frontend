@@ -35,8 +35,6 @@ function AgregarOficina() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    // Si cambia el edificio, reiniciamos el piso seleccionado
     if (name === "edificio_id") {
       setForm({ ...form, edificio_id: value, piso_id: "" });
     } else {
@@ -51,7 +49,6 @@ function AgregarOficina() {
       alert("Faltan campos obligatorios");
       return;
     }
-
     if (isNaN(form.area) || Number(form.area) <= 0) {
       alert("El área debe ser un número positivo");
       return;
@@ -67,11 +64,8 @@ function AgregarOficina() {
       };
 
       const data = await agregarOficinaApi(payload);
-
       if (data.error) throw new Error(data.error);
-
       alert(`Oficina ${data.codigo} agregada correctamente`);
-
       setForm({
         codigo: "",
         piso_id: "",
@@ -85,15 +79,15 @@ function AgregarOficina() {
     }
   };
 
-  // Filtramos los pisos según el edificio seleccionado
   const pisosFiltrados = pisos.filter((p) => p.edificio_id.toString() === form.edificio_id);
 
   return (
     <div className="contenedorAgregar">
       <h2>Agregar Oficina</h2>
       <form onSubmit={handleSubmit}>
-        <label>Edificio:</label>
+        <label htmlFor="edificio_id_oficina">Edificio:</label>
         <select
+          id="edificio_id_oficina"
           name="edificio_id"
           value={form.edificio_id}
           onChange={handleChange}
@@ -107,8 +101,9 @@ function AgregarOficina() {
           ))}
         </select>
 
-        <label>Numero Oficina:</label>
+        <label htmlFor="codigo_oficina">Numero Oficina:</label>
         <input
+          id="codigo_oficina"
           type="text"
           name="codigo"
           value={form.codigo}
@@ -116,13 +111,14 @@ function AgregarOficina() {
           required
         />
 
-        <label>Piso:</label>
+        <label htmlFor="piso_id_oficina">Piso:</label>
         <select
+          id="piso_id_oficina"
           name="piso_id"
           value={form.piso_id}
           onChange={handleChange}
           required
-          disabled={!form.edificio_id} // deshabilitado si no hay edificio seleccionado
+          disabled={!form.edificio_id}
         >
           <option value="">Seleccione un piso</option>
           {(pisosFiltrados || []).map((piso) => (
@@ -132,8 +128,9 @@ function AgregarOficina() {
           ))}
         </select>
 
-        <label>Área (m²):</label>
+        <label htmlFor="area_oficina">Área (m²):</label>
         <input
+          id="area_oficina"
           type="number"
           name="area"
           value={form.area}
@@ -141,15 +138,15 @@ function AgregarOficina() {
           required
         />
 
-        <label>Estado:</label>
-        <select name="estado" value={form.estado} onChange={handleChange}>
+        <label htmlFor="estado_oficina">Estado:</label>
+        <select id="estado_oficina" name="estado" value={form.estado} onChange={handleChange}>
           <option value="libre">Libre</option>
           <option value="ocupada">Ocupada</option>
           <option value="reservada">Reservada</option>
         </select>
 
-        <label>Arrendatario (opcional):</label>
-        <select name="persona_id" value={form.persona_id} onChange={handleChange}>
+        <label htmlFor="persona_id_oficina">Arrendatario (opcional):</label>
+        <select id="persona_id_oficina" name="persona_id" value={form.persona_id} onChange={handleChange}>
           <option value="">Sin arrendatario</option>
           {(personas || []).map((p) => (
             <option key={p.id} value={p.id}>{p.nombre}</option>
@@ -161,5 +158,4 @@ function AgregarOficina() {
     </div>
   );
 }
-
 export default AgregarOficina;

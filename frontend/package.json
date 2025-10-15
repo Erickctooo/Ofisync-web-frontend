@@ -3,13 +3,15 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
-    "test": "jest"
-  },
+ "scripts": {
+  "dev": "vite",
+  "build": "vite build",
+  "lint": "eslint .",
+  "preview": "vite preview",
+  "test": "jest",
+  "test:unit": "jest .test.js",
+  "test:integration": "jest .integration.test.jsx"
+},
   "dependencies": {
     "bootstrap": "^5.3.8",
     "chart.js": "^4.5.0",

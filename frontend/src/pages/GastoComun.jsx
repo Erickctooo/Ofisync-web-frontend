@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { calcularGastoComunApi } from "../../services/gastoComunService";
 import { getEdificios } from "../../services/edificioService";
 
-
 function CalcularGastoComun() {
   const [edificios, setEdificios] = useState([]);
   const [form, setForm] = useState({
@@ -54,8 +53,9 @@ function CalcularGastoComun() {
     <div className="contenedorAgregar">
       <h2>Calcular Gasto Común</h2>
       <form onSubmit={handleSubmit}>
-        <label>Edificio:</label>
+        <label htmlFor="edificio_id">Edificio:</label>
         <select
+          id="edificio_id"
           name="edificio_id"
           value={form.edificio_id}
           onChange={handleChange}
@@ -68,8 +68,9 @@ function CalcularGastoComun() {
           ))}
         </select>
 
-        <label>Mes:</label>
+        <label htmlFor="mes">Mes:</label>
         <input
+          id="mes"
           type="text"
           name="mes"
           value={form.mes}
@@ -77,16 +78,18 @@ function CalcularGastoComun() {
           placeholder="Ej: Octubre 2025"
         />
 
-        <label>Total de gastos ($):</label>
+        <label htmlFor="total">Total de gastos ($):</label>
         <input
+          id="total"
           type="number"
           name="total"
           value={form.total}
           onChange={handleChange}
         />
 
-        <label>Descripción (opcional):</label>
+        <label htmlFor="descripcion">Descripción (opcional):</label>
         <textarea
+          id="descripcion"
           name="descripcion"
           value={form.descripcion}
           onChange={handleChange}

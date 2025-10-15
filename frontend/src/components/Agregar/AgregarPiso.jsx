@@ -9,14 +9,12 @@ function AgregarPiso() {
   const [pisosExistentes, setPisosExistentes] = useState(0);
   const [pisosDisponibles, setPisosDisponibles] = useState(0);
 
-  // Cargar edificios
   useEffect(() => {
     getEdificios()
       .then((data) => setEdificios(data))
       .catch((err) => console.error(err));
   }, []);
 
-  // Actualizar pisos existentes cuando cambie el edificio
   useEffect(() => {
     if (form.edificio_id) {
       const edificioSeleccionado = edificios.find(
@@ -45,12 +43,10 @@ function AgregarPiso() {
       alert("Debe seleccionar un edificio y especificar una cantidad.");
       return;
     }
-
     if (isNaN(form.cantidad) || parseInt(form.cantidad) <= 0) {
       alert("La cantidad debe ser un número positivo.");
       return;
     }
-
     if (parseInt(form.cantidad) > pisosDisponibles) {
       alert(`Solo puedes agregar hasta ${pisosDisponibles} pisos.`);
       return;
@@ -61,11 +57,8 @@ function AgregarPiso() {
         edificio_id: parseInt(form.edificio_id),
         cantidad: parseInt(form.cantidad),
       });
-
       if (data.error) throw new Error(data.error);
-
       alert(data.mensaje || "Pisos agregados correctamente.");
-
       setForm({ edificio_id: "", cantidad: "" });
       setPisosExistentes(0);
       setPisosDisponibles(0);
@@ -78,8 +71,9 @@ function AgregarPiso() {
     <div className="contenedorAgregar">
       <h2>Agregar Pisos a un Edificio</h2>
       <form onSubmit={handleSubmit}>
-        <label>Edificio:</label>
+        <label htmlFor="edificio_id_piso">Edificio:</label>
         <select
+          id="edificio_id_piso"
           name="edificio_id"
           value={form.edificio_id}
           onChange={handleChange}
@@ -99,8 +93,9 @@ function AgregarPiso() {
           </p>
         )}
 
-        <label>Cantidad de pisos a agregar:</label>
+        <label htmlFor="cantidad_pisos">Cantidad de pisos a agregar:</label>
         <input
+          id="cantidad_pisos"
           type="number"
           name="cantidad"
           value={form.cantidad}
