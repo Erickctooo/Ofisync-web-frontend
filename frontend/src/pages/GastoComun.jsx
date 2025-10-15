@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { calcularGastoComunApi } from "../../services/gastoComunService";
 import { getEdificios } from "../../services/edificioService";
-import "./GastoComun.css"; // <-- ¡Importante! Importa el archivo CSS
+import "./GastoComun.css"; // <-- Asegúrate de que este archivo CSS exista
 
 function CalcularGastoComun() {
   const [edificios, setEdificios] = useState([]);
   const [form, setForm] = useState({
     edificio_id: "",
-    mes: "",
+    mes: "", // El estado guardará el formato "YYYY-MM" del input
     descripcion: "",
     gastos: {
       luz: "",
@@ -39,20 +39,29 @@ function CalcularGastoComun() {
     }
   };
 
+  // Función para formatear "YYYY-MM" al formato "Mes Año" que quieres guardar
+  const formatMonthForAPI = (monthString) => {
+    if (!monthString) return "";
+    const [year, month] = monthString.split('-');
+    const date = new Date(year, month - 1);
+    return date.toLocaleString('es-CL', { month: 'long', year: 'numeric' });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const totalCalculado = Object.values(form.gastos).reduce((sum, current) => sum + (Number(current) || 0), 0);
+    const mesFormateado = formatMonthForAPI(form.mes);
 
-    if (!form.edificio_id || !form.mes || totalCalculado <= 0) {
-      alert("Debe completar los campos obligatorios y el total debe ser mayor a cero.");
+    if (!form.edificio_id || !mesFormateado || totalCalculado <= 0) {
+      alert("Debe seleccionar un edificio, un mes y el total debe ser mayor a cero.");
       return;
     }
 
     try {
       const data = await calcularGastoComunApi({
         edificio_id: parseInt(form.edificio_id),
-        mes: form.mes,
+        mes: mesFormateado,
         total: totalCalculado,
         luz: Number(form.gastos.luz) || 0,
         agua: Number(form.gastos.agua) || 0,
@@ -67,7 +76,7 @@ function CalcularGastoComun() {
         `${data.mensaje}\n💵 Gasto por m²: $${data.gasto_por_m2}`
       );
 
-      // Limpiamos el formulario
+      // Limpiamos el formulario después de enviarlo
       setForm({
         edificio_id: "",
         mes: "",
@@ -79,7 +88,7 @@ function CalcularGastoComun() {
     }
   };
 
-  // Calculamos el total en tiempo real para mostrarlo
+  // Calculamos el total en tiempo real para mostrarlo en el formulario
   const totalCalculado = Object.values(form.gastos).reduce((sum, current) => sum + (Number(current) || 0), 0);
 
   return (
@@ -99,7 +108,13 @@ function CalcularGastoComun() {
 
         <div className="form-group span-2">
           <label htmlFor="mes">Mes:</label>
-          <input id="mes" type="text" name="mes" value={form.mes} onChange={handleChange} placeholder="Ej: Octubre 2025" />
+          <input
+            id="mes"
+            type="month"
+            name="mes"
+            value={form.mes}
+            onChange={handleChange}
+          />
         </div>
 
         <div className="form-group">

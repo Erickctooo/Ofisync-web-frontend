@@ -54,7 +54,7 @@ function AgregarPersona() {
             <form onSubmit={handleSubmit} className="agregar-form">
                 <div className="form-group">
                     <label htmlFor="rut_persona">Rut</label>
-                    <input id="rut_persona" type="text" name="rut" value={form.rut} onChange={handleChange} />
+                    <input id="rut_persona" type="text" name="rut" placeholder="11222333-4" value={form.rut} onChange={handleChange} />
                 </div>
                 <div className="form-group">
                     <label htmlFor="nombre_persona">Nombre completo</label>
