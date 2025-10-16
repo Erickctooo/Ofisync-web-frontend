@@ -7,9 +7,8 @@ import * as edificioService from '../../../../services/edificioService';
 // Mockeamos los servicios siendo explícitos con las funciones que usan los componentes hijos
 jest.mock('../../../../services/edificioService', () => ({
   agregarEdificioApi: jest.fn(),
-  getEdificios: jest.fn().mockResolvedValue([]), // <--- ¡LA CLAVE ESTÁ AQUÍ!
+  getEdificios: jest.fn().mockResolvedValue([]),
 }));
-
 jest.mock('../../../../services/pisoService', () => ({
     getPisos: jest.fn().mockResolvedValue([]),
     getPisosPorEdificio: jest.fn().mockResolvedValue([]),
@@ -18,7 +17,6 @@ jest.mock('../../../../services/personaService', () => ({
     getPersonas: jest.fn().mockResolvedValue([]),
 }));
 jest.mock('../../../../services/oficinasService');
-
 
 describe('Prueba de Integración para el componente Agregar', () => {
 
@@ -36,17 +34,16 @@ describe('Prueba de Integración para el componente Agregar', () => {
       </MemoryRouter>
     );
 
-    // 1. Simular que el usuario llena los campos
-    fireEvent.change(screen.getByLabelText('Nombre Edificio:'), { target: { value: 'Edificio de Prueba' } });
-    fireEvent.change(screen.getByLabelText('Pisos Totales:'), { target: { value: '10' } });
-    fireEvent.change(screen.getByLabelText('Área bruta por piso (m²):'), { target: { value: '500' } });
-    fireEvent.change(screen.getByLabelText('Área común (%):'), { target: { value: '20' } });
+    // Buscamos las etiquetas por su texto exacto, sin los dos puntos
+    fireEvent.change(screen.getByLabelText('Nombre Edificio'), { target: { value: 'Edificio de Prueba' } });
+    fireEvent.change(screen.getByLabelText('Pisos Totales'), { target: { value: '10' } });
+    fireEvent.change(screen.getByLabelText('Área bruta por piso (m²)'), { target: { value: '500' } });
+    fireEvent.change(screen.getByLabelText('Área común (%)'), { target: { value: '20' } });
 
-    // 2. Simular clic en el botón
-    const botonesAgregar = screen.getAllByRole('button', { name: /agregar/i });
+    // Hacemos la búsqueda del botón más específica
+    const botonesAgregar = screen.getAllByRole('button', { name: /agregar edificio/i });
     fireEvent.click(botonesAgregar[0]);
 
-    // 3. Verificar que se llamó al servicio con los datos correctos
     await waitFor(() => {
       expect(edificioService.agregarEdificioApi).toHaveBeenCalledWith({
         nombre: 'Edificio de Prueba',
@@ -56,7 +53,6 @@ describe('Prueba de Integración para el componente Agregar', () => {
       });
     });
 
-    // 4. Verificar que se mostró la alerta de éxito
     await waitFor(() => {
         expect(global.alert).toHaveBeenCalledWith('Edificio Edificio de Prueba agregado correctamente');
     });
