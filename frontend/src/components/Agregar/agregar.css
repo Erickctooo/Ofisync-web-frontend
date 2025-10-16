@@ -97,3 +97,11 @@
     grid-column: 1 / -1; /* Ocupa todo el ancho */
     text-align: center;
 }
+
+.error-message {
+    color: #e53e3e; /* Un color rojo para indicar error */
+    font-size: 0.8rem;
+    margin-top: 5px;
+    margin-bottom: 0;
+    font-weight: 500;
+}
